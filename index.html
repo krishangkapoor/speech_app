@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Input App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="app-container">
+        <h1>Speech Input App</h1>
+        <button id="start-recording">Start Recording</button>
+        <p id="transcription"></p>
+        <form id="transcription-form">
+            <input type="hidden" id="user_id" value="1">
+            <textarea id="transcription-field" name="transcription"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response"></div>
+    </div>
+</body>
+</html>
