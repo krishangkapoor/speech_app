@@ -12,7 +12,7 @@ CORS(app)
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Krishang@23',
+    'password': '',
     'database': 'speech_app_db'
 }
 
