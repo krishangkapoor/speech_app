@@ -1,5 +1,5 @@
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = 'en-US';
+recognition.lang = 'auto';
 recognition.interimResults = false;
 
 // Variable to track if recording is in progress
