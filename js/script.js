@@ -1,30 +1,45 @@
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = 'auto';
-recognition.interimResults = false;
+recognition.lang = 'en-US';
+recognition.interimResults = false; 
+recognition.continuous = true; // Enable continuous recognition
 
 // Variable to track if recording is in progress
 let isRecording = false;
+
+// Variable to store the complete transcription
+let completeTranscription = '';
 
 // Start recording when the button is clicked
 document.getElementById('start-recording').addEventListener('click', () => {
     if (!isRecording) {
         recognition.start();
         isRecording = true;
+        completeTranscription = ''; // Reset transcription when starting a new recording
+        document.getElementById('transcription').innerText = '';
     }
 });
 
 // Handle the result event
 recognition.addEventListener('result', event => {
-    const transcript = event.results[0][0].transcript;
-    document.getElementById('transcription').innerText = transcript;
-    document.getElementById('transcription-field').value = transcript;
-    isRecording = false; // Stop recording after a result is received
-    recognition.stop();
+    let interimTranscription = '';
+
+    for (const result of event.results) {
+        interimTranscription += result[0].transcript;
+    }
+
+    // Append only new transcriptions
+    if (!completeTranscription.endsWith(interimTranscription)) {
+        completeTranscription += interimTranscription.replace(completeTranscription, '');
+    }
+
+    document.getElementById('transcription').innerText = completeTranscription;
+    document.getElementById('transcription-field').value = completeTranscription;
 });
 
 // Handle the end event
 recognition.addEventListener('end', () => {
     isRecording = false; // Ensure recording state is reset when recognition ends
+    recognition.stop();
 });
 
 // Handle errors
